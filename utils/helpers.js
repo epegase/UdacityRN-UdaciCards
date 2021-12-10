@@ -1,32 +1,20 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import DATA from "./DATA";
-
-export const loadData = async (DATA) => {
-  try {
-    const jsonValue = JSON.stringify(DATA);
-    await AsyncStorage.setItem("data", jsonValue);
-  } catch (e) {
-    // read error
-    console.log(e);
-  }
-
-  console.log("Done.");
-};
 
 export const getDecks = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem("data");
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
+    const decks = await AsyncStorage.getItem("data");
+    return decks != null ? JSON.parse(decks) : null;
   } catch (e) {
     // error reading value
+    console.log("failed to fetch decks");
   }
 };
 
 export const getDeck = async (id) => {
   try {
-    const jsonValue = await AsyncStorage.getItem("data");
-    const deck = JSON.parse(jsonValue);
-    return jsonValue != null ? deck[id] : null;
+    const decks = await AsyncStorage.getItem("data");
+    const data = JSON.parse(decks);
+    return decks != null ? data[id] : null;
   } catch (e) {
     // read error
     console.log(e);
@@ -36,16 +24,15 @@ export const getDeck = async (id) => {
 };
 
 export const saveDeckTitle = async (title) => {
-  let data = {
-    [title]: {
-      title,
-      questions: [],
-    },
-  };
-  const jsonValue = JSON.stringify(data);
   try {
-    await AsyncStorage.mergeItem("data", jsonValue);
-    return;
+    const data = {
+      [title]: {
+        title,
+        questions: [],
+      },
+    };
+    const jsonDeck = JSON.stringify(data);
+    await AsyncStorage.mergeItem("data", jsonDeck);
   } catch (e) {
     // save error
     console.log(e);
@@ -55,15 +42,17 @@ export const saveDeckTitle = async (title) => {
 };
 
 export const addCardToDeck = async (title, card) => {
-  let data = {
-    [title]: {
-      title,
-      questions: [...decks[title].questions, card],
-    },
-  };
   try {
-    const jsonValue = JSON.stringify(data);
-    await AsyncStorage.mergeItem("data", jsonValue);
+    const deck = await getDeck(title);
+    const data = {
+      [title]: {
+        title,
+        questions: [...deck.questions, card],
+      },
+    };
+    const jsonDeck = JSON.stringify(data);
+    await AsyncStorage.getItem("data", jsonDeck);
+    return card;
   } catch (e) {
     // save error
     console.log(e);

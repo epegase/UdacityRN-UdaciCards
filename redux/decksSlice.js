@@ -4,6 +4,7 @@ import {
   getDeck,
   getDecks,
   saveDeckTitle,
+  deleteDeck,
 } from "../utils/helpers";
 
 export const fetchDecks = createAsyncThunk("decks/fetchDecks", async () => {
@@ -22,16 +23,23 @@ export const fetchOneDeck = createAsyncThunk(
 export const postDeckTitle = createAsyncThunk(
   "decks/postDeckTitle",
   async (title) => {
-    const response = await saveDeckTitle(title);
-    return response;
+    await saveDeckTitle(title);
+    return title;
   }
 );
 
 export const postCardtoDeck = createAsyncThunk(
   "decks/postCardtoDeck",
   async (title, card) => {
-    const response = await addCardToDeck(title, card);
+    response = await addCardToDeck(title, card);
     return response;
+  }
+);
+
+export const postDeleteDeck = createAsyncThunk(
+  "decks/postDeleteDeck",
+  async (id) => {
+    await deleteDeck(id);
   }
 );
 
@@ -40,10 +48,10 @@ export const decksSlice = createSlice({
   initialState: {},
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchDecks.fulfilled, (state, action) => {
+    builder.addCase(fetchDecks.fulfilled, (state, { payload }) => {
       return {
         ...state,
-        ...action.payload,
+        ...payload,
       };
     });
     builder.addCase(fetchOneDeck.fulfilled, (state, { payload }) => {
@@ -63,9 +71,12 @@ export const decksSlice = createSlice({
         ...state,
         [title]: {
           ...state[title],
-          questions: [...state[title].questions].concat(card),
+          questions: [...state[title].questions.concat(card)],
         },
       };
+    });
+    builder.addCase(postDeleteDeck.fulfilled, (state) => {
+      return state;
     });
   },
 });

@@ -4,13 +4,18 @@ import DeckList from "../screens/DeckList";
 import Deck from "../screens/Deck";
 import AddCard from "../screens/AddCard";
 import Quiz from "../screens/Quiz";
+import { DecksTabs } from "./TabNavigator";
 
 const Stack = createNativeStackNavigator();
 
 export function DecksStacks() {
   return (
-    <Stack.Navigator initialRouteName="DeckList">
-      <Stack.Screen name="DeckList" component={DeckList} />
+    <Stack.Navigator initialRouteName="Decks">
+      <Stack.Screen
+        name="Home"
+        component={DecksTabs}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Deck" component={Deck} />
       <Stack.Screen name="AddCard" component={AddCard} />
       <Stack.Screen name="Quiz" component={Quiz} />

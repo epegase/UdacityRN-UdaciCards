@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, View, Button } from "react-native";
+import React, { useEffect } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import CardDeck from "../components/CardDeck";
 import { fetchDecks, selectDecks } from "../redux/decksSlice";
-import { getDecks, loadData } from "../utils/helpers";
+
+/* 
+- displays the title of each Deck
+- displays the number of cards in each deck
+*/
 
 const DeckList = ({ navigation }) => {
   const decks = useSelector(selectDecks);
@@ -26,7 +30,7 @@ const DeckList = ({ navigation }) => {
               key={id}
               title={decks[id].title}
               questions={decks[id].questions}
-              onPress={() => navigation.navigate("Deck", { id: id })}
+              onPress={() => navigation.navigate("Deck", { title: id })}
             />
           ))}
         </ScrollView>

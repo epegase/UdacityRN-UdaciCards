@@ -1,36 +1,54 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { TextInput, Button } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { postCardtoDeck } from "../redux/decksSlice";
+
+/* 
+- input to enter in the question
+- input to enter in the answer
+- a button to submit the new question
+*/
 
 const AddCard = ({ route, navigation }) => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  const title = route.params.id;
+  const { title } = route.params;
   const dispatch = useDispatch();
 
   const onPressSubmit = () => {
-    if (question && answer) {
+    if (question !== "" && answer !== "") {
       dispatch(postCardtoDeck(title, { question, answer }));
     }
     setQuestion("");
     setAnswer("");
-    navigation.navigate("Deck");
+    navigation.goBack();
   };
 
   return (
     <View>
       <TextInput
-        style={styles.input}
-        onChangeText={(question) => setQuestion(question)}
+        mode="outlined"
+        label="Question"
+        placeholder="Type something"
         value={question}
+        onChangeText={(question) => setQuestion(question)}
       />
       <TextInput
-        style={styles.input}
-        onChangeText={(answer) => setAnswer(answer)}
+        mode="outlined"
+        label="Answer"
+        placeholder="Type something"
         value={answer}
+        onChangeText={(answer) => setAnswer(answer)}
       />
-      <Button onPress={onPressSubmit} title="Submit" color="#000" />
+      <Button
+        icon="send"
+        mode="contained"
+        onPress={onPressSubmit}
+        style={styles.ButtonStyle}
+      >
+        Submit
+      </Button>
     </View>
   );
 };
@@ -38,10 +56,7 @@ const AddCard = ({ route, navigation }) => {
 export default AddCard;
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  ButtonStyle: {
+    marginTop: 30,
   },
 });

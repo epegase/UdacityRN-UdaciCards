@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { TextInput, Button, Title } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { postDeckTitle } from "../redux/decksSlice";
+
+/* 
+- input to enter the title of new deck
+- button to submit new deck title
+*/
 
 const AddDeck = ({ navigation }) => {
   const [title, setTitle] = useState("");
@@ -22,13 +28,22 @@ const AddDeck = ({ navigation }) => {
 
   return (
     <View>
-      <Text>Title of Deck</Text>
+      <Title> Enter the Title of new Deck</Title>
       <TextInput
-        style={styles.input}
-        onChangeText={handleChange}
+        mode="outlined"
+        label="Deck Title"
+        placeholder="Type Title"
         value={title}
+        onChangeText={handleChange}
       />
-      <Button onPress={onPressAddTitle} title="Submit" color="#000" />
+      <Button
+        icon="send"
+        mode="contained"
+        onPress={onPressAddTitle}
+        style={styles.ButtonStyle}
+      >
+        Submit
+      </Button>
     </View>
   );
 };
@@ -36,10 +51,7 @@ const AddDeck = ({ navigation }) => {
 export default AddDeck;
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  ButtonStyle: {
+    marginTop: 60,
   },
 });
