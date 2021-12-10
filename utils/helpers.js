@@ -51,8 +51,8 @@ export const addCardToDeck = async (title, card) => {
       },
     };
     const jsonDeck = JSON.stringify(data);
-    await AsyncStorage.getItem("data", jsonDeck);
-    return card;
+    await AsyncStorage.mergeItem("data", jsonDeck);
+    return data;
   } catch (e) {
     // save error
     console.log(e);

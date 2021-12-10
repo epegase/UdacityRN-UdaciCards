@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { selectOneDeck } from "../redux/decksSlice";
 
 /* 
 - display a card question
@@ -13,19 +15,19 @@ import { StyleSheet, Text, View } from "react-native";
 const Quiz = ({ id, question, answer, route, navigation }) => {
   const [flip, setFlip] = useState(false);
   const [correct, setCorrect] = useState(0);
-  cont[(incorrect, setIncorrect)] = useState(0);
+  const [incorrect, setIncorrect] = useState(0);
   const [count, setCount] = useState(0);
 
   const dispatch = useDispatch();
   const { title } = route.params;
   const deck = useSelector((state) => selectOneDeck(state, title));
 
-  const handleCorrect = () => {
+  const onPressCorrect = () => {
     setCorrect(() => correct + 1);
     setCount(() => count + 1);
     setFlip(false);
   };
-  const handleIncorrect = () => {
+  const onPressIncorrect = () => {
     setIncorrect(() => incorrect + 1);
     setCount(() => count + 1);
     setFlip(false);

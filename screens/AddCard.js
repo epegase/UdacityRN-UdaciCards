@@ -18,7 +18,8 @@ const AddCard = ({ route, navigation }) => {
 
   const onPressSubmit = () => {
     if (question !== "" && answer !== "") {
-      dispatch(postCardtoDeck(title, { question, answer }));
+      const card = { question, answer };
+      dispatch(postCardtoDeck(title, card));
     }
     setQuestion("");
     setAnswer("");
