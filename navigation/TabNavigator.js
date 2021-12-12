@@ -11,8 +11,8 @@ export function DecksTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Decks"
-        component={DeckList}
+        name="UdaciCards"
+        component={DecksStacks}
         options={{
           tabBarIcon: () => <Icon name="home" size={30} />,
         }}

@@ -13,7 +13,8 @@ import { postCardtoDeck } from "../redux/decksSlice";
 const AddCard = ({ route, navigation }) => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-  const { title } = route.params;
+  const title = route.params.title;
+
   const dispatch = useDispatch();
 
   const onPressSubmit = () => {

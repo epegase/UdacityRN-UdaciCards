@@ -13,7 +13,7 @@ export function DecksStacks() {
     <Stack.Navigator initialRouteName="Decks">
       <Stack.Screen
         name="Home"
-        component={DecksTabs}
+        component={DeckList}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Deck" component={Deck} />

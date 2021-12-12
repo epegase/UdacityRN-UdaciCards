@@ -12,7 +12,7 @@ const CardDeck = ({ title, questions, onPress }) => {
         <Card>
           <Card.Content>
             <Title>{title}</Title>
-            <Paragraph>{questions.length} cards</Paragraph>
+            <Paragraph>{[questions].length} cards</Paragraph>
           </Card.Content>
         </Card>
       </TouchableOpacity>

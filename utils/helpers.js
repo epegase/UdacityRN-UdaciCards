@@ -1,8 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const key = "data";
+
 export const getDecks = async () => {
   try {
-    const decks = await AsyncStorage.getItem("data");
+    const decks = await AsyncStorage.getItem(key);
     return decks != null ? JSON.parse(decks) : null;
   } catch (e) {
     // error reading value
@@ -12,7 +14,7 @@ export const getDecks = async () => {
 
 export const getDeck = async (id) => {
   try {
-    const decks = await AsyncStorage.getItem("data");
+    const decks = await AsyncStorage.getItem(key);
     const data = JSON.parse(decks);
     return decks != null ? data[id] : null;
   } catch (e) {
@@ -32,7 +34,7 @@ export const saveDeckTitle = async (title) => {
       },
     };
     const jsonDeck = JSON.stringify(data);
-    await AsyncStorage.mergeItem("data", jsonDeck);
+    await AsyncStorage.mergeItem(key, jsonDeck);
   } catch (e) {
     // save error
     console.log(e);
@@ -46,13 +48,12 @@ export const addCardToDeck = async (title, card) => {
     const deck = await getDeck(title);
     const data = {
       [title]: {
-        title,
-        questions: [...deck.questions, card],
+        title: title,
+        questions: [...deck.questions].concat(card),
       },
     };
     const jsonDeck = JSON.stringify(data);
-    await AsyncStorage.mergeItem("data", jsonDeck);
-    return data;
+    await AsyncStorage.mergeItem(key, jsonDeck);
   } catch (e) {
     // save error
     console.log(e);

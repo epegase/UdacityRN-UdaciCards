@@ -18,6 +18,7 @@ import {
 
 const Deck = ({ navigation, route }) => {
   const { title } = route.params;
+
   const deck = useSelector((state) => selectOneDeck(state, title));
 
   const dispatch = useDispatch();
@@ -46,10 +47,7 @@ const Deck = ({ navigation, route }) => {
             icon="plus"
             mode="contained"
             onPress={() =>
-              navigation.navigate("AddCard", {
-                screen: "AddCard",
-                params: { title: route.params.id },
-              })
+              navigation.navigate("AddCard", { title: deck.title })
             }
             style={styles.ButtonStyle}
           >
@@ -59,9 +57,7 @@ const Deck = ({ navigation, route }) => {
           <Button
             icon="cards-outline"
             mode="contained"
-            onPress={() =>
-              navigation.navigate("Quiz", { title: route.params.id })
-            }
+            onPress={() => navigation.navigate("Quiz", { title: deck.title })}
             style={styles.ButtonStyle}
           >
             Start Quiz

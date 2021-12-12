@@ -31,8 +31,8 @@ export const postDeckTitle = createAsyncThunk(
 export const postCardtoDeck = createAsyncThunk(
   "decks/postCardtoDeck",
   async (title, card) => {
-    const response = await addCardToDeck(title, card);
-    return response;
+    await addCardToDeck(title, card);
+    return card;
   }
 );
 
@@ -69,8 +69,14 @@ export const decksSlice = createSlice({
     builder.addCase(postCardtoDeck.fulfilled, (state, { payload }) => {
       return {
         ...state,
-        ...payload,
+        [title]: {
+          ...state[title],
+          questions: [...state[title].questions].concat(payload),
+        },
       };
+    });
+    builder.addCase(postCardtoDeck.rejected, () => {
+      console.log("rejected");
     });
     builder.addCase(postDeleteDeck.fulfilled, (state) => {
       return state;

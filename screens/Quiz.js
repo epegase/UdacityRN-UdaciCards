@@ -12,7 +12,7 @@ import { selectOneDeck } from "../redux/decksSlice";
 - display the percentage correct once the quiz is complete
 */
 
-const Quiz = ({ id, question, answer, route, navigation }) => {
+const Quiz = ({ question, answer, route, navigation }) => {
   const [flip, setFlip] = useState(false);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
@@ -35,8 +35,8 @@ const Quiz = ({ id, question, answer, route, navigation }) => {
 
   return (
     <View>
-      <Text>{question}</Text>
-      <Text>{answer}</Text>
+      <Text>{deck.questions[count].question}</Text>
+      <Text>{deck.questions[count].answer}</Text>
       <Button onPress={onPressCorrect} title="Correct" color="#008000" />
       <Button onPress={onPressIncorrect} title="Incorrect" color="#ff0000" />
     </View>
