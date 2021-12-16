@@ -27,14 +27,15 @@ export const getDeck = async (id) => {
 
 export const saveDeckTitle = async (title) => {
   try {
-    const data = {
-      [title]: {
-        title,
-        questions: [],
-      },
-    };
-    const jsonDeck = JSON.stringify(data);
-    await AsyncStorage.mergeItem(key, jsonDeck);
+    await AsyncStorage.mergeItem(
+      key,
+      JSON.stringify({
+        [title]: {
+          title: title,
+          questions: [],
+        },
+      })
+    );
   } catch (e) {
     // save error
     console.log(e);
@@ -45,15 +46,16 @@ export const saveDeckTitle = async (title) => {
 
 export const addCardToDeck = async (title, card) => {
   try {
-    const deck = await getDeck(title);
+    const jsonDecks = await AsyncStorage.getItem(key);
+    const decks = JSON.parse(jsonDecks);
+
     const data = {
       [title]: {
         title: title,
-        questions: [...deck.questions].concat(card),
+        questions: [...decks[title].questions].concat(card),
       },
     };
-    const jsonDeck = JSON.stringify(data);
-    await AsyncStorage.mergeItem(key, jsonDeck);
+    await AsyncStorage.mergeItem(key, JSON.stringify(data));
   } catch (e) {
     // save error
     console.log(e);
@@ -64,7 +66,10 @@ export const addCardToDeck = async (title, card) => {
 
 export const deleteDeck = async (id) => {
   try {
-    await AsyncStorage.removeItem(id);
+    const jsonDecks = await AsyncStorage.getItem(key);
+    const decks = JSON.parse(jsonDecks);
+    const { [id]: value, ...remainingDecks } = decks;
+    await AsyncStorage.setItem(key, JSON.stringify(remainingDecks));
   } catch (e) {
     // remove error
   }

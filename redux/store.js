@@ -5,4 +5,8 @@ export default configureStore({
   reducer: {
     decks: decksReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

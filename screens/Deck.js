@@ -27,8 +27,8 @@ const Deck = ({ navigation, route }) => {
   }, [dispatch]);
 
   const handleDelete = () => {
-    dispatch(postDeleteDeck({ id: title }));
-    navigation.navigate("DeckList");
+    dispatch(postDeleteDeck(title));
+    navigation.goBack();
   };
 
   return (

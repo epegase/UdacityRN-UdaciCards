@@ -20,6 +20,7 @@ const AddCard = ({ route, navigation }) => {
   const onPressSubmit = () => {
     if (question !== "" && answer !== "") {
       const card = { question, answer };
+      console.log(card);
       dispatch(postCardtoDeck(title, card));
     }
     setQuestion("");

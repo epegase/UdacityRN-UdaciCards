@@ -32,7 +32,10 @@ export const postCardtoDeck = createAsyncThunk(
   "decks/postCardtoDeck",
   async (title, card) => {
     await addCardToDeck(title, card);
-    return card;
+    return {
+      title,
+      card,
+    };
   }
 );
 
@@ -40,6 +43,7 @@ export const postDeleteDeck = createAsyncThunk(
   "decks/postDeleteDeck",
   async (id) => {
     await deleteDeck(id);
+    return id;
   }
 );
 
@@ -54,9 +58,11 @@ export const decksSlice = createSlice({
         ...payload,
       };
     });
+
     builder.addCase(fetchOneDeck.fulfilled, (state, { payload }) => {
       return state[payload];
     });
+
     builder.addCase(postDeckTitle.fulfilled, (state, { payload }) => {
       return {
         ...state,
@@ -66,20 +72,21 @@ export const decksSlice = createSlice({
         },
       };
     });
+
     builder.addCase(postCardtoDeck.fulfilled, (state, { payload }) => {
+      const { title, card } = payload;
       return {
         ...state,
         [title]: {
           ...state[title],
-          questions: [...state[title].questions].concat(payload),
+          questions: [...state[title].questions].concat(card),
         },
       };
     });
-    builder.addCase(postCardtoDeck.rejected, () => {
-      console.log("rejected");
-    });
-    builder.addCase(postDeleteDeck.fulfilled, (state) => {
-      return state;
+
+    builder.addCase(postDeleteDeck.fulfilled, (state, { payload }) => {
+      const { [payload]: value, ...remainingDecks } = state;
+      return remainingDecks;
     });
   },
 });
