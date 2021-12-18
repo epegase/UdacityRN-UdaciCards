@@ -30,7 +30,7 @@ export const postDeckTitle = createAsyncThunk(
 
 export const postCardtoDeck = createAsyncThunk(
   "decks/postCardtoDeck",
-  async (title, card) => {
+  async ({ title, card }) => {
     await addCardToDeck(title, card);
     return {
       title,

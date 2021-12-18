@@ -22,4 +22,10 @@ const CardDeck = ({ title, questions, onPress }) => {
 
 export default CardDeck;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  CardStyle: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
