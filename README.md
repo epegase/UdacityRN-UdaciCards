@@ -41,3 +41,4 @@ To complete this project, I read or watch the following ressources :
 
 - [Redux Fundamentals](https://redux.js.org/tutorials/fundamentals/part-1-overview), Redux Documentation
 - [Redux Essentials](https://redux.js.org/tutorials/essentials/part-1-overview-concepts), Redux Documentation.
+- For Local Notification in Expo, I find this [gist by VeraZab](https://gist.github.com/VeraZab/c3f13d51588bcfdf6799da65decf26fa) very helpful.
