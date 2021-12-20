@@ -10,10 +10,10 @@ const Stack = createNativeStackNavigator();
 
 export function DecksStacks() {
   return (
-    <Stack.Navigator initialRouteName="Decks">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
-        component={DeckList}
+        component={DecksTabs}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Deck" component={Deck} />

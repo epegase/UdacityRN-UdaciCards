@@ -36,12 +36,7 @@ const Deck = ({ navigation, route }) => {
       {deck !== null && (
         <View>
           <View style={styles.CardStyle}>
-            <CardDeck
-              key={deck.title}
-              title={deck.title}
-              questions={deck.questions}
-              onPress={() => navigation.navigate("Deck", { title: deck.title })}
-            />
+            <CardDeck title={deck.title} questions={deck.questions} />
           </View>
           <Button
             icon="plus"

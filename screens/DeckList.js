@@ -11,7 +11,6 @@ import { fetchDecks, selectDecks } from "../redux/decksSlice";
 
 const DeckList = ({ navigation }) => {
   const decks = useSelector(selectDecks);
-  console.log(decks);
 
   const dispatch = useDispatch();
   useEffect(() => {

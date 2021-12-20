@@ -67,6 +67,15 @@ const Quiz = ({ route, navigation }) => {
         >
           Restart Quiz
         </Button>
+        <Button
+          icon="keyboard-backspace"
+          mode="contained"
+          onPress={() => navigation.goBack()}
+          style={styles.ButtonStyle}
+          color="#FFA500"
+        >
+          Back to Deck
+        </Button>
       </View>
     );
   }

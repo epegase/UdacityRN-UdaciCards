@@ -5,7 +5,6 @@ import store from "./redux/store";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { DecksTabs } from "./navigation/TabNavigator";
 import { DecksStacks } from "./navigation/StackNavigator";
 import { LocalNotification } from "./utils/notifications";
 
@@ -16,7 +15,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <DecksTabs />
+        <DecksStacks />
       </NavigationContainer>
     </Provider>
   );

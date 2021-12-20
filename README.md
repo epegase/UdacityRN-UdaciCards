@@ -27,6 +27,13 @@ When you run ==expo start== (or ==npm start==), Expo CLI starts Metro Bundler.
 
 If you want to open the app on your phone or tablet, Go to your app store and install [Expo Go](https://expo.dev/client). Open ==Expo Go== and scan the QR Code in Metro Bundler to open the app on your phone/tablet.
 
+## Testing
+
+This app was tested, throught [Expo Go](https://expo.dev/client), on this devices :
+
+- For Android, **Samsung Galaxy A10S**
+- For iOS, **iPhone SE**
+
 ## In Progress
 
 - [ ] Comments and refactoring of codebase

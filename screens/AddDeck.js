@@ -18,12 +18,15 @@ const AddDeck = ({ navigation }) => {
     if (title !== "") {
       dispatch(postDeckTitle(title));
     }
+    navigation.navigate("Home", {
+      screen: "Deck",
+      params: { title: title },
+    });
     setTitle("");
-    navigation.goBack();
   };
 
-  const handleChange = (text) => {
-    setTitle(text);
+  const handleChange = (title) => {
+    setTitle(title);
   };
 
   return (
